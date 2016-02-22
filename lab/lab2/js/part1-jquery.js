@@ -150,4 +150,50 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 
 $(document).ready(function() {
   // Do your stuff here
+  $('#text-label1').text('Street Address');
+  $('#text-label2').text('City');
+  $('#text-label3').text('State');
+  $('#number-label').text('Zip Code');
+  $('#checkbox-label1').text('Home Address');
+  $('#checkbox-label2').text('P.O. Box');
+  $('#color-label').text('Select Marker Color:');
+  $("button").text("Map that shit, yo.");
+
+  $("#text-input1").val("146 Emily St");
+  $('#text-input2').val('Philadelphia');
+  $('#text-label3').val('PA');
+  $('#numeric-input').val(19148);
+  $(":checkbox#cbox-input1").val("off");
+  $(":checkbox#cbox-input2").val("on");
+  $('#color-input').val('#6495ED');
+
+  $('#text-input1').prop('disabled',false);
+  $('#text-input2').prop('disabled',false);
+  $('#text-input3').prop('disabled',false);
+  $('#cbox-input2').prop('disabled',false);
+  $('#numeric-input').prop('disabled',false);
+  $('#cbox-input1').prop('disabled',false);
+
+  myMarker = [];
+
+  $('button').click(function(){
+    map.removeLayer(myMarker);
+    var myData = {
+      "Address":$("#text-input1").val(),
+      "City":$('#text-input2').val(),
+      "State":$('#text-label3').val(),
+      "Zip Code":$('#numeric-input').val(),
+      "Home Address":$(":checkbox#cbox-input1").val(),
+      "P.O. Box":$(":checkbox#cbox-input2").val(),
+      "Color":$('#color-input').val(),
+      "Lat": 39.92251,
+      "Lon": -75.14952,
+      "Descr": "This is Where I Used to Live!",
+    };
+    console.log(myData.Address, "Hi!");
+    myMarker = L.circleMarker([myData.Lat, myData.Lon], {radius: 20, color: myData.Color}).addTo(map).bindPopup(myData.Descr);
+
+  });
+
+
 });
